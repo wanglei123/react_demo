@@ -1,12 +1,19 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from "react-redux";
 import {addTodo, removeTodo, toggleCompleted} from "../store/todoList.js";
 import {nanoid} from "nanoid";
+import axios from "axios";
 
 const TodoList = () => {
 	// 从configureStore里取到对应的reducer
 	const todoList = useSelector(reducer => reducer.todoList);
 	const dispatch = useDispatch();
+
+	useEffect(() => {
+		axios.get('/api/test').then(res => {
+			console.log(222, res)
+		})
+	}, [])
 
 	const del = (id) => {
 		dispatch(removeTodo({id})) // 参数必须是个对象
