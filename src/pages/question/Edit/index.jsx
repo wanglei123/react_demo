@@ -1,4 +1,5 @@
 import React from 'react';
+import EditCanvas from "./EditCanvas.jsx";
 import styles from './index.module.scss'
 
 const Index = () => {
@@ -10,7 +11,7 @@ const Index = () => {
 					<div className={styles.left}>left</div>
 					<div className={styles.main}>
 						<div className={styles['canvas-wrapper']}>
-							<div style={{height: '900px'}}>画布</div>
+							<EditCanvas />
 						</div>
 					</div>
 					<div className={styles.right}>right</div>
