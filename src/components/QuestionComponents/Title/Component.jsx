@@ -4,7 +4,7 @@ import {Typography} from 'antd';
 const {Title} = Typography;
 
 // 默认属性
-const QuestionTitleDefaultProps = {
+export const QuestionTitleDefaultProps = {
 	text: '一行标题',
 	level: 1,
 	isCenter: false

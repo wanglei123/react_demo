@@ -4,7 +4,7 @@ import {Typography, Input} from 'antd';
 const {Paragraph} = Typography;
 
 // 默认属性
-const QuestionInputDefaultProps = {
+export const QuestionInputDefaultProps = {
 	title: '输入框标题',
 	placeholder: '请输入...',
 }

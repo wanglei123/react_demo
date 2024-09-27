@@ -1,8 +1,11 @@
 import React from 'react';
 import EditCanvas from "./EditCanvas.jsx";
+import useLoadQuestionData from "../../../hooks/useLoadQuestionData";
 import styles from './index.module.scss'
 
 const Index = () => {
+	const {loading, data} = useLoadQuestionData()
+
 	return (
 		<div className={styles.container}>
 			<div style={{height: '40px', backgroundColor: '#fff'}}>Header</div>
@@ -11,7 +14,7 @@ const Index = () => {
 					<div className={styles.left}>left</div>
 					<div className={styles.main}>
 						<div className={styles['canvas-wrapper']}>
-							<EditCanvas />
+							<EditCanvas loading={loading} />
 						</div>
 					</div>
 					<div className={styles.right}>right</div>
