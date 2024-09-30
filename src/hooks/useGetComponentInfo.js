@@ -1,17 +1,12 @@
-import {useEffect} from 'react';
-import {useParams} from 'react-router-dom'
-import {useRequest} from "ahooks";
-import axios from "axios";
-import {useDispatch, useSelector} from "react-redux";
-import {resetComponents} from "../store/componentReducer";
+import { useSelector} from "react-redux";
 
 function useGetComponentInfo() {
 	const components = useSelector(reducer => reducer.components);
-	const {componentList = []} = components
-
+	const {componentList = [], selectedId = ''} = components
 
 	return {
-		componentList
+		componentList,
+		selectedId
 	}
 
 }

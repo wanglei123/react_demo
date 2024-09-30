@@ -1,16 +1,11 @@
 import {createSlice} from '@reduxjs/toolkit'
 import {nanoid} from "nanoid";
+import {produce} from 'immer'
 
 const INIT_STATE = {
 	componentList: [],
-
+	selectedId: ''
 }
-// {
-// 	fe_id: '',
-// 		type: '',
-// 	title: '',
-// 	props: {}
-// }
 
 export const componentsSlice = createSlice({
 	name: 'components', // 模块的名字，redux store默认可以拆分模块
@@ -20,9 +15,13 @@ export const componentsSlice = createSlice({
 		resetComponents(state, action){
 			return action.payload;
 		},
+		// 修改selectId
+		changeSelectId: produce((draft, action) => {
+			draft.selectedId = action.payload;
+		})
 	}
 })
 
-export const {resetComponents} = componentsSlice.actions;
+export const {resetComponents,changeSelectId} = componentsSlice.actions;
 
 export default componentsSlice.reducer;

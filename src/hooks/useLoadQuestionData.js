@@ -2,7 +2,7 @@ import {useEffect} from 'react';
 import {useParams} from 'react-router-dom'
 import {useRequest} from "ahooks";
 import axios from "axios";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {resetComponents} from "../store/componentReducer";
 
 function useLoadQuestionData() {
@@ -21,9 +21,14 @@ function useLoadQuestionData() {
 	}, [id])
 
 	useEffect(() => {
+		let selectedId = ''
 		if(!data) return
 		const {title = '', componentList = []} = data
-		dispatch(resetComponents({componentList}))
+		if(componentList?.length > 0){
+			selectedId = componentList[0]?.fe_id
+		}
+
+		dispatch(resetComponents({componentList, selectedId}))
 	}, [data]);
 
 	return {loading, data, error}

@@ -1,7 +1,8 @@
 import React from 'react';
 import {Spin} from 'antd';
-import QuestionTitle from "../../../components/QuestionComponents/Title/Component.jsx";
-import QuestionInput from "../../../components/QuestionComponents/Input/Component.jsx";
+import {useDispatch} from "react-redux";
+import classNames from "classnames";
+import {changeSelectId} from "../../../store/componentReducer";
 import useGetComponentInfo from "../../../hooks/useGetComponentInfo";
 import {getComponentConfByType}  from  '../../../components/QuestionComponents';
 import styles from './editCanvas.module.scss';
@@ -18,8 +19,13 @@ function getComponent(componentInfo){
 }
 
 const EditCanvas = ({loading}) => {
-	const {componentList = []} = useGetComponentInfo()
-	console.log(222, componentList)
+	const {componentList = [], selectedId = ''} = useGetComponentInfo()
+	const dispatch = useDispatch();
+
+	const handleClick = (e, id) => {
+		e.stopPropagation() // 阻止冒泡
+		dispatch(changeSelectId(id))
+	}
 
 	if(loading){
 		return <div style={{textAlign: 'center', marginTop: '20px'}}>
@@ -30,7 +36,13 @@ const EditCanvas = ({loading}) => {
 		<div className={styles.canvas}>
 			{componentList.map((item, index) => {
 				const {fe_id = ''} = item
-				return <div className={styles['component-wrapper']} key={fe_id}>
+				const wrapperDefaultClassName = styles['component-wrapper']
+				const selectedClassName = styles['selectId']
+				const wrapperClassName = classNames({
+					[wrapperDefaultClassName] : true,
+					[selectedClassName] : selectedId === fe_id
+				})
+				return <div className={wrapperClassName} key={fe_id} onClick={(e) => handleClick(e,fe_id)}>
 					<div className={styles.component}>
 						{getComponent(item)}
 					</div>
