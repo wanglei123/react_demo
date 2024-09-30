@@ -14,7 +14,7 @@ const PropComponent = (props) => {
 				<Input />
 			</Form.Item>
 			<Form.Item label='层级' name='level' >
-				<Select options={[{value: 1, text: 1},{value: 1, text: 1},{value: 1, text: 1}]}></Select>
+				<Select options={[{value: 1, text: 1},{value: 2, text: 2},{value: 3, text: 3}]}></Select>
 			</Form.Item>
 			<Form.Item  name='isCenter' valuePropName='checked' >
 				<Checkbox>居中显示</Checkbox>
