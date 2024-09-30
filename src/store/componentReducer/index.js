@@ -18,10 +18,23 @@ export const componentsSlice = createSlice({
 		// 修改selectId
 		changeSelectId: produce((draft, action) => {
 			draft.selectedId = action.payload;
-		})
+		}),
+		// 添加新组件
+		addComponent: produce((draft, action) => {
+			const newComponent = action.payload
+			const {selectedId, componentList} = draft;
+			const index = componentList.findIndex(item => item.fe_id === selectedId);
+
+			if(index < 0){
+				draft.componentList.push(newComponent)
+			} else {
+				draft.componentList.splice(index + 1,0,newComponent)
+			}
+			draft.selectedId = newComponent.fe_id
+		}),
 	}
 })
 
-export const {resetComponents,changeSelectId} = componentsSlice.actions;
+export const {resetComponents,changeSelectId,addComponent} = componentsSlice.actions;
 
 export default componentsSlice.reducer;
