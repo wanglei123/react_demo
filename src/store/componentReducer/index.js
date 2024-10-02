@@ -32,9 +32,18 @@ export const componentsSlice = createSlice({
 			}
 			draft.selectedId = newComponent.fe_id
 		}),
+		// 修改组件属性
+		editProps: produce((draft, action) => {
+			const {fe_id, newProps} = action.payload;
+			const selectedComponent = draft.componentList.find(item => item.fe_id === fe_id)
+			if(selectedComponent){
+				selectedComponent.props = newProps
+			}
+
+		})
 	}
 })
 
-export const {resetComponents,changeSelectId,addComponent} = componentsSlice.actions;
+export const {resetComponents,changeSelectId,addComponent,editProps} = componentsSlice.actions;
 
 export default componentsSlice.reducer;

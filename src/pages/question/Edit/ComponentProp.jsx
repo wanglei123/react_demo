@@ -1,6 +1,8 @@
 import React from 'react';
 import useGetComponentInfo from "../../../hooks/useGetComponentInfo.js";
 import {getComponentConfByType} from "../../../components/QuestionComponents";
+import {useDispatch} from "react-redux";
+import {editProps} from "../../../store/componentReducer/index.js";
 
 const Blank = () => {
 	return (
@@ -9,19 +11,26 @@ const Blank = () => {
 }
 
 const ComponentProp = () => {
+	const dispatch = useDispatch();
 	const {selectComponent} = useGetComponentInfo()
 	if (!selectComponent) {
 		return <Blank />
 	}
-	const {type, props} = selectComponent
+	const {type, props, fe_id} = selectComponent
 	const componentConf = getComponentConfByType(type)
 	if(!componentConf){
 		return <Blank />
 	}
 	const {PropComponent} = componentConf
+	const changeForm = (value) => {
+		if(selectComponent === null){
+			return
+		}
+		dispatch(editProps({fe_id, newProps: value}))
+	}
 	return (
 		<div>
-			<PropComponent {...props} />
+			<PropComponent {...props} onChange={changeForm} />
 		</div>
 	);
 };

@@ -2,14 +2,18 @@ import React, {useEffect} from 'react';
 import {Input, Form, Select,Checkbox} from 'antd';
 
 const PropComponent = (props) => {
-	const {text, level, isCenter} = props
+	const {text, level, isCenter, onChange} = props
 	const [form] = Form.useForm()
 
 	useEffect(() => {
 		form.setFieldsValue({text, level, isCenter})
 	}, [text, level, isCenter])
+
+	const handleChangeForm = (value) => {
+		onChange && onChange(form.getFieldsValue())
+	}
 	return (
-		<Form form={form} layout='vertical' initialValues={{text, level, isCenter}} >
+		<Form form={form} layout='vertical' initialValues={{text, level, isCenter}} onValuesChange={handleChangeForm} >
 			<Form.Item label='标题内容' name='text' rules={[{required: true, message: '请输入标题内容' }]}>
 				<Input />
 			</Form.Item>
