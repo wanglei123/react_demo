@@ -34,7 +34,7 @@ const EditCanvas = ({loading}) => {
 	}
 	return (
 		<div className={styles.canvas}>
-			{componentList.map((item, index) => {
+			{componentList.filter(item => !item.isHidden).map((item, index) => {
 				const {fe_id = ''} = item
 				const wrapperDefaultClassName = styles['component-wrapper']
 				const selectedClassName = styles['selectId']

@@ -1,6 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit'
 import {nanoid} from "nanoid";
 import {produce} from 'immer'
+import {getNextSelectId} from './utils.js'
 
 const INIT_STATE = {
 	componentList: [],
@@ -39,11 +40,41 @@ export const componentsSlice = createSlice({
 			if(selectedComponent){
 				selectedComponent.props = newProps
 			}
-
+		}),
+		// 删除组件
+		deleteComponent: produce((draft) => {
+			const {componentList, selectedId} = draft;
+			const newSelectId = getNextSelectId(selectedId, componentList)
+			draft.selectedId = newSelectId
+			const index = componentList.findIndex(item => item.fe_id === selectedId);
+			if(index > -1){
+				componentList.splice(index,1)
+			}
+		}),
+		// 隐藏和显示组件
+		changeComponentHidden: produce((draft, action) => {
+			const { componentList} = draft;
+			const {fe_id, isHidden} = action.payload;
+			let newSelectedId = ''
+			if(isHidden){
+				newSelectedId = getNextSelectId(fe_id, componentList)
+			} else {
+				newSelectedId = fe_id
+			}
+			draft.selectedId = newSelectedId
+			const curComp = componentList.find(item => item.fe_id === fe_id)
+			if(curComp){
+				curComp.isHidden = isHidden
+			}
 		})
 	}
 })
 
-export const {resetComponents,changeSelectId,addComponent,editProps} = componentsSlice.actions;
+export const {resetComponents,
+	changeSelectId,
+	addComponent,
+	editProps,
+	changeComponentHidden,
+	deleteComponent} = componentsSlice.actions;
 
 export default componentsSlice.reducer;

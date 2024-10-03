@@ -6,6 +6,7 @@ import useLoadQuestionData from "../../../hooks/useLoadQuestionData";
 import styles from './index.module.scss'
 import LeftPanel from "./LeftPanel.jsx";
 import RightPanel from "./RightPanel.jsx";
+import Header from "./Header.jsx";
 
 const Index = () => {
 	const {loading, data} = useLoadQuestionData()
@@ -16,7 +17,9 @@ const Index = () => {
 
 	return (
 		<div className={styles.container}>
-			<div style={{height: '40px', backgroundColor: '#fff'}}>Header</div>
+			<div style={{height: '40px', backgroundColor: '#fff'}}>
+				<Header />
+			</div>
 			<div className={styles['content-wrapper']}>
 				<div className={styles['content']}>
 					<div className={styles.left}>
