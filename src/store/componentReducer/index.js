@@ -66,6 +66,15 @@ export const componentsSlice = createSlice({
 			if(curComp){
 				curComp.isHidden = isHidden
 			}
+		}),
+		// 锁定组件
+		toggleLockedComponent: produce((draft, action) => {
+			const {componentList} = draft
+			const {fe_id} = action.payload;
+			const curComp = componentList.find(item => item.fe_id === fe_id)
+			if(curComp){
+				curComp.isLocked = !curComp.isLocked
+			}
 		})
 	}
 })
@@ -75,6 +84,7 @@ export const {resetComponents,
 	addComponent,
 	editProps,
 	changeComponentHidden,
+	toggleLockedComponent,
 	deleteComponent} = componentsSlice.actions;
 
 export default componentsSlice.reducer;

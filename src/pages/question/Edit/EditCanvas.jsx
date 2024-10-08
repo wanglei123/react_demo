@@ -38,9 +38,11 @@ const EditCanvas = ({loading}) => {
 				const {fe_id = ''} = item
 				const wrapperDefaultClassName = styles['component-wrapper']
 				const selectedClassName = styles['selectId']
+				const lockedClassName = styles['locked']
 				const wrapperClassName = classNames({
 					[wrapperDefaultClassName] : true,
-					[selectedClassName] : selectedId === fe_id
+					[selectedClassName] : selectedId === fe_id,
+					[lockedClassName]: item.isLocked
 				})
 				return <div className={wrapperClassName} key={fe_id} onClick={(e) => handleClick(e,fe_id)}>
 					<div className={styles.component}>

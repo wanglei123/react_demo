@@ -16,12 +16,13 @@ const ComponentProp = () => {
 	if (!selectComponent) {
 		return <Blank />
 	}
-	const {type, props, fe_id} = selectComponent
+	const {type, props, fe_id, isLocked} = selectComponent
 	const componentConf = getComponentConfByType(type)
 	if(!componentConf){
 		return <Blank />
 	}
 	const {PropComponent} = componentConf
+
 	const changeForm = (value) => {
 		if(selectComponent === null){
 			return
@@ -30,7 +31,7 @@ const ComponentProp = () => {
 	}
 	return (
 		<div>
-			<PropComponent {...props} onChange={changeForm} />
+			<PropComponent {...props} onChange={changeForm} disabled={isLocked} />
 		</div>
 	);
 };

@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import { Input, Form } from 'antd';
 
 const PropComponent = (props) => {
-	const {title, placeholder, onChange} = props
+	const {title, placeholder, onChange, disabled} = props
 	const [form] = Form.useForm()
 
 	useEffect(() => {
@@ -13,7 +13,7 @@ const PropComponent = (props) => {
 		onChange && onChange(form.getFieldsValue())
 	}
 	return (
-		<Form form={form} layout='vertical' initialValues={{title, placeholder}} onValuesChange={handleChangeForm} >
+		<Form disabled={disabled} form={form} layout='vertical' initialValues={{title, placeholder}} onValuesChange={handleChangeForm} >
 			<Form.Item label='标题' name='title' rules={[{required: true, message: '请输入标题' }]}>
 				<Input />
 			</Form.Item>

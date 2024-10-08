@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {Input, Form, Select,Checkbox} from 'antd';
 
 const PropComponent = (props) => {
-	const {text, level, isCenter, onChange} = props
+	const {text, level, isCenter, onChange, disabled} = props
 	const [form] = Form.useForm()
 
 	useEffect(() => {
@@ -13,7 +13,7 @@ const PropComponent = (props) => {
 		onChange && onChange(form.getFieldsValue())
 	}
 	return (
-		<Form form={form} layout='vertical' initialValues={{text, level, isCenter}} onValuesChange={handleChangeForm} >
+		<Form disabled={disabled} form={form} layout='vertical' initialValues={{text, level, isCenter}} onValuesChange={handleChangeForm} >
 			<Form.Item label='标题内容' name='text' rules={[{required: true, message: '请输入标题内容' }]}>
 				<Input />
 			</Form.Item>
