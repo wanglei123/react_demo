@@ -1,7 +1,7 @@
 import React from 'react';
 import {useKeyPress} from 'ahooks';
 import {useDispatch} from "react-redux";
-import {deleteComponent, copySelectedComponent, pasteComponent } from '../store/componentReducer/index.js';
+import {deleteComponent, copySelectedComponent, pasteComponent, selectPrevComponent,selectNextComponent } from '../store/componentReducer/index.js';
 
 function isActiveElementValid(){
 	const activeEle = document.activeElement
@@ -33,7 +33,22 @@ const useBindCanvasKeyPress = () => {
 		}
 		dispatch(pasteComponent())
 	})
+	// 选中上一个
+	useKeyPress(['uparrow'], () => {
+		if(!isActiveElementValid()){
+			return
+		}
+		dispatch(selectPrevComponent())
+	})
 
+
+	// 选中下一个
+	useKeyPress(['downarrow'], () => {
+		if(!isActiveElementValid()){
+			return
+		}
+		dispatch(selectNextComponent())
+	})
 };
 
 export default useBindCanvasKeyPress;
