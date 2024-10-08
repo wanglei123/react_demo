@@ -2,16 +2,17 @@
 import QuestionTitle from './Title'
 import QuestionInput from './Input'
 import QuestionPargraph from "./QuestionPargraph/index.js";
+import QuestionInfo from "./QuestionInfo/index.js";
 
 // 定义全部组件配置的列表
-const componentConfList = [QuestionTitle,QuestionInput, QuestionPargraph]
+const componentConfList = [QuestionTitle,QuestionInput, QuestionPargraph, QuestionInfo]
 
 // 组件分组
 export const componentConfGroup = [
 	{
 		groupId: 'textGroup',
 		groupName: '文本显示',
-		components: [QuestionTitle, QuestionPargraph]
+		components: [QuestionTitle, QuestionPargraph, QuestionInfo]
 	},
 	{
 		groupId: 'inputGroup',
