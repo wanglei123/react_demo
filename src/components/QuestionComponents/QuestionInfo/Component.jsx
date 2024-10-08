@@ -14,10 +14,10 @@ const QuestionTitle = (props) => {
 	const descList = desc.split('\n')
 	return (
 		<div style={{textAlign: 'center'}}>
-			<Title style={{fontSize: '24px', marginBottom: 0}} >
+			<Title style={{fontSize: '24px'}} >
 				{text}
 			</Title>
-			<Paragraph style={{ marginBottom: 0}}>
+			<Paragraph>
 				{descList.map((t, index) => {
 					return <span key={index}>
 					{index > 0 && <br />}
