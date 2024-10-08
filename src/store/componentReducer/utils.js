@@ -18,3 +18,16 @@ export function getNextSelectId(fe_id, componentList){
 	}
 	return newSelectId
 }
+
+// 插入新组件
+export function insertNewComponent(draft, newComponent){
+	const {selectedId, componentList} = draft;
+	const index = componentList.findIndex(item => item.fe_id === selectedId);
+
+	if(index < 0){
+		draft.componentList.push(newComponent)
+	} else {
+		draft.componentList.splice(index + 1,0,newComponent)
+	}
+	draft.selectedId = newComponent.fe_id
+}

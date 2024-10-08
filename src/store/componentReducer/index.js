@@ -1,11 +1,13 @@
 import {createSlice} from '@reduxjs/toolkit'
-import {nanoid} from "nanoid";
+import _ from 'lodash';
 import {produce} from 'immer'
-import {getNextSelectId} from './utils.js'
+import {getNextSelectId, insertNewComponent} from './utils.js'
+import {nanoid} from "nanoid";
 
 const INIT_STATE = {
 	componentList: [],
-	selectedId: ''
+	selectedId: '',
+	copiedComponent: null,  // 复制的组件
 }
 
 export const componentsSlice = createSlice({
@@ -23,15 +25,7 @@ export const componentsSlice = createSlice({
 		// 添加新组件
 		addComponent: produce((draft, action) => {
 			const newComponent = action.payload
-			const {selectedId, componentList} = draft;
-			const index = componentList.findIndex(item => item.fe_id === selectedId);
-
-			if(index < 0){
-				draft.componentList.push(newComponent)
-			} else {
-				draft.componentList.splice(index + 1,0,newComponent)
-			}
-			draft.selectedId = newComponent.fe_id
+			insertNewComponent(draft, newComponent)
 		}),
 		// 修改组件属性
 		editProps: produce((draft, action) => {
@@ -44,8 +38,7 @@ export const componentsSlice = createSlice({
 		// 删除组件
 		deleteComponent: produce((draft) => {
 			const {componentList, selectedId} = draft;
-			const newSelectId = getNextSelectId(selectedId, componentList)
-			draft.selectedId = newSelectId
+			draft.selectedId = getNextSelectId(selectedId, componentList)
 			const index = componentList.findIndex(item => item.fe_id === selectedId);
 			if(index > -1){
 				componentList.splice(index,1)
@@ -75,6 +68,25 @@ export const componentsSlice = createSlice({
 			if(curComp){
 				curComp.isLocked = !curComp.isLocked
 			}
+		}),
+		// 复制当前选中的组件
+		copySelectedComponent: produce((draft) => {
+			const {componentList, selectedId} = draft
+			console.log(222, componentList)
+			const selectedComponent = componentList.find(item => item.fe_id === selectedId)
+			if(selectedComponent === null){
+				return
+			}
+			draft.copiedComponent = _.cloneDeep(selectedComponent)
+		}),
+		// 粘贴组件
+		pasteComponent: produce((draft) => {
+			const {copiedComponent, selectedId, componentList} = draft
+			if(copiedComponent === null){
+				return
+			}
+			copiedComponent.fe_id = nanoid()
+			insertNewComponent(draft, copiedComponent)
 		})
 	}
 })
@@ -85,6 +97,8 @@ export const {resetComponents,
 	editProps,
 	changeComponentHidden,
 	toggleLockedComponent,
+	copySelectedComponent,
+	pasteComponent,
 	deleteComponent} = componentsSlice.actions;
 
 export default componentsSlice.reducer;
