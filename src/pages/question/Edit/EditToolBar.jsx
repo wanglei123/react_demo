@@ -1,8 +1,8 @@
 import React from 'react';
 import {Space, Button, Tooltip} from 'antd';
 import {useDispatch} from "react-redux";
-import {deleteComponent, changeComponentHidden, toggleLockedComponent, copySelectedComponent, pasteComponent } from '../../../store/componentReducer/index.js';
 import {DeleteOutlined, EyeInvisibleOutlined, LockOutlined, CopyOutlined, BlockOutlined} from '@ant-design/icons';
+import {deleteComponent, changeComponentHidden, toggleLockedComponent, copySelectedComponent, pasteComponent } from '../../../store/componentReducer/index.js';
 import useGetComponentInfo from "../../../hooks/useGetComponentInfo.js";
 
 const EditToolBar = () => {

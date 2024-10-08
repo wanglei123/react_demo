@@ -2,6 +2,7 @@ import React from 'react';
 import {Spin} from 'antd';
 import {useDispatch} from "react-redux";
 import classNames from "classnames";
+import useBindCanvasKeyPress	 from "../../../hooks/useBindCanvasKeyPress.js";
 import {changeSelectId} from "../../../store/componentReducer";
 import useGetComponentInfo from "../../../hooks/useGetComponentInfo";
 import {getComponentConfByType}  from  '../../../components/QuestionComponents';
@@ -19,6 +20,7 @@ function getComponent(componentInfo){
 }
 
 const EditCanvas = ({loading}) => {
+	useBindCanvasKeyPress()
 	const {componentList = [], selectedId = ''} = useGetComponentInfo()
 	const dispatch = useDispatch();
 
