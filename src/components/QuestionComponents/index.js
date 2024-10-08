@@ -3,9 +3,10 @@ import QuestionTitle from './Title'
 import QuestionInput from './Input'
 import QuestionPargraph from "./QuestionPargraph/index.js";
 import QuestionInfo from "./QuestionInfo/index.js";
+import questionTextarea from "./QuestionTextarea/index.js";
 
 // 定义全部组件配置的列表
-const componentConfList = [QuestionTitle,QuestionInput, QuestionPargraph, QuestionInfo]
+const componentConfList = [QuestionTitle,QuestionInput, QuestionPargraph, QuestionInfo, questionTextarea]
 
 // 组件分组
 export const componentConfGroup = [
@@ -17,7 +18,7 @@ export const componentConfGroup = [
 	{
 		groupId: 'inputGroup',
 		groupName: '输入显示',
-		components: [QuestionInput]
+		components: [QuestionInput,questionTextarea]
 	}
 ]
 
