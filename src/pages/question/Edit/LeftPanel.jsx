@@ -2,6 +2,7 @@ import React from 'react';
 import {Tabs} from 'antd';
 import { AndroidOutlined, AppleOutlined } from '@ant-design/icons';
 import ComponentLib from "./ComponentLib.jsx";
+import Layers from "./Layers";
 
 const LeftPanel = () => {
 	const tabItems = [
@@ -16,7 +17,7 @@ const LeftPanel = () => {
 			label: (<span>
 				图层
 			</span>),
-			children: <div>图层</div>,
+			children: <Layers />,
 			icon: <AppleOutlined />,
 		}
 	]
