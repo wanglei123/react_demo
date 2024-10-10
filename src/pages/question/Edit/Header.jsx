@@ -4,9 +4,15 @@ import {Button, Typography, Space} from 'antd';
 import {LeftOutlined} from "@ant-design/icons";
 import EditToolBar from "./EditToolBar.jsx";
 import styles from './header.module.scss'
-
+import useGetComponentInfo from "../../../hooks/useGetComponentInfo.js";
 
 const {Title} = Typography;
+
+const SaveButton = () => {
+	const {componentList} = useGetComponentInfo()
+
+	return <Button type='primary'>保存</Button>
+}
 
 const Header = () => {
 	const nav = useNavigate();
@@ -24,8 +30,8 @@ const Header = () => {
 				</div>
 				<div className={styles['right']}>
 					<Space>
-						<Button>取消</Button>
-						<Button type='primary'>保存</Button>
+						<SaveButton />
+						<Button type='primary'>发布</Button>
 					</Space>
 				</div>
 			</div>
